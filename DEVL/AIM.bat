@@ -36,7 +36,7 @@ REM Set SFTP credentials
 REM -------------------------------------
 
 set SFTPUSER=Coloradocollege
-set SFTPPASS=JcDm6gHLTuzQ
+set SFTPPASS=password
 set SFTPHOST=169.54.207.228
 set SFTPPORT=22
 
