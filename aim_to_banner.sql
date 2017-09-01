@@ -1,0 +1,7 @@
+SET LINESIZE 132
+SET SERVEROUTPUT ON SIZE 1000000 FORMAT WRAPPED
+SPOOL output.txt
+
+execute baninst1.szpdisa;
+
+exit
