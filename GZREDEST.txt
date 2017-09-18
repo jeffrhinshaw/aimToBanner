@@ -7,3 +7,51 @@ GZREDST_NAME,GZREDST_LABEL,GZREDST_EMAIL_ADDRESS,GZREDST_STATUS,GZREDST_ACTIVITY
 SZPDISA,DEFAULT,banner-sa@ColoradoCollege.edu,A,8/28/2017 9:36:02 AM,BANSECR_JH
 SZPDISA,TEST,jeff.hinshaw@ColoradoCollege.edu,A,8/28/2017 9:37:55 AM,BANSECR_JH
 SZPDISA,SENDER,banadmin@coloradocollege.edu,A,8/28/2017 9:40:15 AM,BANSECR_JH
+
+SELECT *
+FROM GZREDST
+WHERE GZREDST_NAME = 'SZPDISA';
+
+Insert into GZREDST (
+    GZREDST_NAME
+    , GZREDST_LABEL
+    , GZREDST_EMAIL_ADDRESS
+    , GZREDST_STATUS )
+VALUES (
+    'SZPDISA'
+    , 'DEFAULT'
+    , 'banner-sa@ColoradoCollege.edu'
+    , 'A' );
+
+Insert into GZREDST (
+    GZREDST_NAME
+    , GZREDST_LABEL
+    , GZREDST_EMAIL_ADDRESS
+    , GZREDST_STATUS )
+VALUES (
+    'SZPDISA'
+    , 'DEFAULT'
+    , 'accessibilityresources@coloradocollege.edu'
+    , 'A' );    
+    
+Insert into GZREDST (
+    GZREDST_NAME
+    , GZREDST_LABEL
+    , GZREDST_EMAIL_ADDRESS
+    , GZREDST_STATUS )
+VALUES (
+    'SZPDISA'
+    , 'TEST'
+    , 'jeff.hinshaw@ColoradoCollege.edu'
+    , 'A' );
+    
+Insert into GZREDST (
+    GZREDST_NAME
+    , GZREDST_LABEL
+    , GZREDST_EMAIL_ADDRESS
+    , GZREDST_STATUS )
+VALUES (
+    'SZPDISA'
+    , 'SENDER'
+    , 'banadmin@coloradocollege.edu'
+    , 'A' );                            

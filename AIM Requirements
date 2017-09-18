@@ -1,0 +1,66 @@
+---------------------------
+-- Requirements. SR 43639--
+---------------------------
+The CC Accessibility team would like Banner to update nightly and reflect disabiity status as reflected in the AIMS system
+
+1) Sara R. will update SATURN.STVDISA to have disibility codes and descriptions as needed
+	- The code will exactly match the code as in AIMS
+	- Sara will have to abbreviate the description since banner has a smaller field to store this than does the AIMS system
+2) New nightly job will pull the current disability information from AIMS
+	a) Student id
+	b) Student disability description (2 character numeric)
+	c) Note, a student may have more than one disability
+	d) The disability info will populate SATURN.SGRDISA (sgadisa form)
+		a) For the student, current term, and disability
+    	b) should have at 7:00pm daily. we should have access to sftp server.
+3) When there is an error processing the file, an email will be sent to sara
+	- if the disability code is not in SATURN.STVDISA
+	- if the student id is not found
+
+-- Outstanding Issues
+  -- sara needs to enter codes
+  -- sara needs to confirm she can see the AIMS codes
+  -- would be nice to get an email distro to use, instead of saras email
+
+
+------------
+-- Design --
+------------
+- Schedule a nightly job (Should run after 0600pt)
+	- FTP AIMS file disabilityIDs.txt from AIMS to BANJO(T,P)
+	- Copy the file to (BANDEVLDB,BANPRODDB):\External_tables
+	- Run new proc SZPDISA to read file and populate db
+	- Email on error
+
+Proc: BANINST1.SZPDISA
+	- Reads the uploaded file 
+	- Reads current term
+	- Converts userid to pidm
+	- inserts into inserts into SGRDISA
+		- Pidm
+		- term
+		- disability code
+
+Banjo(T, P)
+   	- New Folder: D:\app\Banr\local\aim\AimToBanner
+   	- New Bat: aim.bat
+   	- New Sql for bat to call: aim_to_banner.sql
+   	- New files: 
+		- output.txt
+	    - DISABILITYidS.TXT - Downloaded from AIMS nightly
+   	- New table / file:  (for file read) SZXDISA, bandevldb:d:\External_tables
+   	- Added rows for email:  SEE GZREDEST.txt 
+BANDEVLDB,BANPRODDB
+	- New file d:\External_tables\disabilityIDs.txt
+		- Copied here from ftp
+
+------------------
+- Install Notes: -
+------------------
+- create table / file:  (for file read) SZXDISA, bandevldb:d:\External_tables
+- Move procedure: BANINST1.SZPDISA
+- Create synonym for szpdisa
+- Move / create .bat
+- confirm baninst1_sql points to correct region (if other than prod)
+- Move / create .sql
+* - Insert email addresses into GZREDEST

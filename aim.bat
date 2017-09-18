@@ -28,7 +28,7 @@ REM -------------------------------------
 REM Delete prior AIM files on BANJOT
 REM -------------------------------------
 
-del d:\app\Banr\local\aim\%AIMFILE%
+del d:\app\Banr\local\aim\AimToBanner\%AIMFILE%
 
 
 REM -------------------------------------
@@ -45,15 +45,17 @@ REM -------------------------------------------------
 REM Receive AIM disability file and send to BANDEVLDB
 REM -------------------------------------------------
 
-c:\pscp\pscp.exe -sftp -P %SFTPPORT% -pw %SFTPPASS% %SFTPUSER%@%SFTPHOST%:%AIMFILE% %AIMFILE%
-copy disabilityIDs.txt \\bandevldb\d$\External_Tables\%AIMFILE%
+C:\pscp\pscp.exe -sftp -P %SFTPPORT% -pw %SFTPPASS% %SFTPUSER%@%SFTPHOST%:%AIMFILE% %AIMFILE%
+REM copy disabilityIDs.txt \\bandevldb\d$\External_Tables\%AIMFILE%
+copy disabilityIDs.txt \\bantestrepdb\d$\External_Tables\%AIMFILE%
 
 
 REM --------------------------------------------------------------
 REM Execute aim_to_banner sql which inserts AIMS data to CC Banner
 REM --------------------------------------------------------------
 
-call baninst1_sql aim_to_banner
+REM call baninst1_sql aim_to_banner
+Sqlplus /@TESTREP_BANINST1 @aim_to_banner
 
 date /t
 time /t

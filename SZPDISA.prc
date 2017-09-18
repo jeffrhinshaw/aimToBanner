@@ -144,6 +144,10 @@ procedure p_send_email_on_error is
    message         VARCHAR2 (3800) := 'this is a sample message body';
 begin
 
+    IF (error_students.count = 0) THEN
+        return;
+    END IF;
+
     message := f_build_error_email_body();
 
     sz_utilities.p_send_email (
